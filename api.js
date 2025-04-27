@@ -10,9 +10,20 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const allowedOrigins = ['http://localhost:3000', 'https://training-management-system-txhi.onrender.com'];
+
 app.use(cors({
-    origin: 'https://training-management-system-txhi.onrender.com'
-  }));
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
+
+// Handle preflight requests
+app.options('*', cors()); 
 
 /** ============ Trainee Requests ============ */
 
