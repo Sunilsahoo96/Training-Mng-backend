@@ -11,7 +11,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: 'https://hospital-frontend.onrender.com'
+    origin: 'https://training-management-system-txhi.onrender.com'
   }));
 
 /** ============ Trainee Requests ============ */
