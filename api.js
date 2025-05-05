@@ -340,6 +340,7 @@ app.delete("/delete-trainer/:id", (req, res) => {
 
 app.post("/signup", async (req, res) => {
     try {
+        
         const client = await mongoClient.connect(MONGO_URI);
         const database = client.db("Training-Management-System");
 
@@ -347,6 +348,7 @@ app.post("/signup", async (req, res) => {
             Email: req.body.email,
             Password: req.body.password
         };
+        
 
         await database.collection("Trainee-Signup").insertOne(traineeData);
         client.close();
@@ -356,6 +358,7 @@ app.post("/signup", async (req, res) => {
 
         res.status(201).json({ message: "Signup successful", token });  // ✅ Return token
     } catch (error) {
+        console.error("Error during signup:", error);
         res.status(500).json({ error: error.message });
     }
 });
